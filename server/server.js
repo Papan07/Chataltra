@@ -29,7 +29,9 @@ const io = new Server(server, {
     origin: [
       process.env.CLIENT_URL || "http://localhost:3000",
       "http://localhost:5173",
-      "http://localhost:5174"
+      "http://localhost:5174",
+      "https://chataltra.vercel.app",
+      "https://chataltra.onrender.com"
     ],
     methods: ["GET", "POST"],
     credentials: true
