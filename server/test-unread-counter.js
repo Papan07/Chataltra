@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Chat = require('./models/Chat');
 const Message = require('./models/Message');
 const User = require('./models/User');
-require('dotenv').config();
+require('dotenv').config({ path: require('path').join(__dirname, '.env') });
 
 async function testUnreadCounter() {
   try {

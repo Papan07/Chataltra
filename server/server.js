@@ -4,7 +4,7 @@ const cors = require('cors');
 const { createServer } = require('http');
 const { Server } = require('socket.io');
 const path = require('path');
-require('dotenv').config();
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 // Import database configuration
 const connectDB = require('./config/db');
@@ -60,6 +60,22 @@ app.use((req, res, next) => {
   if (req.body && Object.keys(req.body).length > 0) {
     console.log('Request body:', req.body);
   }
+  next();
+});
+
+// Enhanced error logging middleware
+app.use((req, res, next) => {
+  const originalSend = res.send;
+  res.send = function(data) {
+    if (res.statusCode >= 400) {
+      console.error(`❌ ERROR ${res.statusCode} - ${req.method} ${req.path}`);
+      console.error('Response:', data);
+      if (req.headers) {
+        console.error('Headers:', req.headers);
+      }
+    }
+    originalSend.call(this, data);
+  };
   next();
 });
 
@@ -123,8 +139,18 @@ app.get('/health', (req, res) => {
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ message: 'Something went wrong!' });
+  console.error('🚨 UNHANDLED ERROR:');
+  console.error('Error message:', err.message);
+  console.error('Error stack:', err.stack);
+  console.error('Request URL:', req.url);
+  console.error('Request method:', req.method);
+  console.error('Request headers:', req.headers);
+  console.error('Request body:', req.body);
+
+  res.status(500).json({
+    message: 'Something went wrong!',
+    error: process.env.NODE_ENV === 'development' ? err.message : 'Internal server error'
+  });
 });
 
 // 404 handler
