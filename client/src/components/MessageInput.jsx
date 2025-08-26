@@ -421,25 +421,25 @@ const MessageInput = ({ onSendMessage, chatId, replyToMessage, onCancelReply }) 
   };
 
   return (
-    <div className="p-4">
+    <div className="p-3 sm:p-4">
       {/* Reply Preview */}
       {replyToMessage && (
-        <div className="mb-3 p-3 bg-gray-50 border-l-4 border-whatsapp-green rounded-r-md">
+        <div className="mb-2 sm:mb-3 p-2 sm:p-3 bg-gray-50 border-l-4 border-whatsapp-green rounded-r-md">
           <div className="flex items-start justify-between">
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <div className="flex items-center space-x-2 mb-1">
-                <Reply className="h-3 w-3 text-whatsapp-green" />
-                <span className="text-xs font-medium text-whatsapp-green">
+                <Reply className="h-3 w-3 text-whatsapp-green flex-shrink-0" />
+                <span className="text-xs font-medium text-whatsapp-green truncate">
                   Replying to {replyToMessage.sender.username}
                 </span>
               </div>
-              <p className="text-sm text-gray-600 truncate">
+              <p className="text-xs sm:text-sm text-gray-600 truncate">
                 {replyToMessage.content}
               </p>
             </div>
             <button
               onClick={onCancelReply}
-              className="ml-2 p-1 hover:bg-gray-200 rounded-full"
+              className="ml-2 p-1 hover:bg-gray-200 rounded-full flex-shrink-0"
             >
               <X className="h-3 w-3 text-gray-500" />
             </button>
@@ -458,41 +458,41 @@ const MessageInput = ({ onSendMessage, chatId, replyToMessage, onCancelReply }) 
 
       {/* Upload progress indicator */}
       {isUploading && (
-        <div className="mb-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+        <div className="mb-2 sm:mb-3 p-2 sm:p-3 bg-blue-50 border border-blue-200 rounded-lg">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm text-blue-700">Uploading file...</span>
-            <span className="text-sm text-blue-700">{uploadProgress}%</span>
+            <span className="text-xs sm:text-sm text-blue-700">Uploading file...</span>
+            <span className="text-xs sm:text-sm text-blue-700">{uploadProgress}%</span>
           </div>
-          <div className="w-full bg-blue-200 rounded-full h-2">
+          <div className="w-full bg-blue-200 rounded-full h-1.5 sm:h-2">
             <div
-              className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+              className="bg-blue-600 h-1.5 sm:h-2 rounded-full transition-all duration-300"
               style={{ width: `${uploadProgress}%` }}
             />
           </div>
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="flex items-end space-x-3">
+      <form onSubmit={handleSubmit} className="flex items-end space-x-2 sm:space-x-3">
         {/* File upload button */}
         <button
           type="button"
           onClick={handleFileUpload}
           disabled={isUploading}
-          className={`flex-shrink-0 p-2 rounded-full transition-colors ${
+          className={`flex-shrink-0 p-1.5 sm:p-2 rounded-full transition-colors ${
             isUploading
               ? 'text-gray-400 cursor-not-allowed'
               : 'text-gray-500 hover:text-whatsapp-green hover:bg-gray-100'
           }`}
         >
           {isUploading ? (
-            <Upload className="h-5 w-5 animate-pulse" />
+            <Upload className="h-4 w-4 sm:h-5 sm:w-5 animate-pulse" />
           ) : (
-            <Paperclip className="h-5 w-5" />
+            <Paperclip className="h-4 w-4 sm:h-5 sm:w-5" />
           )}
         </button>
 
         {/* Message input container */}
-        <div className="flex-1 relative">
+        <div className="flex-1 relative min-w-0">
           <div className="flex items-end bg-gray-100 rounded-lg border border-gray-200 focus-within:border-whatsapp-green">
             <textarea
               ref={textareaRef}
@@ -500,7 +500,7 @@ const MessageInput = ({ onSendMessage, chatId, replyToMessage, onCancelReply }) 
               onChange={handleInputChange}
               onKeyPress={handleKeyPress}
               placeholder="Type a message..."
-              className="flex-1 px-4 py-3 bg-transparent border-0 resize-none focus:outline-none max-h-32 min-h-[44px]"
+              className="flex-1 px-3 sm:px-4 py-2 sm:py-3 bg-transparent border-0 resize-none focus:outline-none max-h-24 sm:max-h-32 min-h-[36px] sm:min-h-[44px] text-sm sm:text-base"
               rows={1}
             />
             
@@ -509,13 +509,13 @@ const MessageInput = ({ onSendMessage, chatId, replyToMessage, onCancelReply }) 
               ref={emojiButtonRef}
               type="button"
               onClick={handleEmojiClick}
-              className={`flex-shrink-0 p-2 transition-colors ${
+              className={`flex-shrink-0 p-1.5 sm:p-2 transition-colors ${
                 showEmojiPicker
                   ? 'text-whatsapp-green bg-whatsapp-green-light'
                   : 'text-gray-500 hover:text-whatsapp-green'
               }`}
             >
-              <Smile className="h-5 w-5" />
+              <Smile className="h-4 w-4 sm:h-5 sm:w-5" />
             </button>
           </div>
 
@@ -534,7 +534,7 @@ const MessageInput = ({ onSendMessage, chatId, replyToMessage, onCancelReply }) 
           onClick={handleVoiceButtonClick}
           disabled={!isAudioSupported}
           title={!isAudioSupported ? 'Audio recording not supported in this browser' : (isRecording ? 'Stop recording' : 'Start voice recording')}
-          className={`flex-shrink-0 p-3 rounded-full transition-all ${
+          className={`flex-shrink-0 p-2 sm:p-3 rounded-full transition-all ${
             !isAudioSupported
               ? 'bg-gray-100 text-gray-300 cursor-not-allowed'
               : isRecording
@@ -542,26 +542,26 @@ const MessageInput = ({ onSendMessage, chatId, replyToMessage, onCancelReply }) 
               : 'bg-gray-200 text-gray-500 hover:bg-whatsapp-green hover:text-white'
           }`}
         >
-          {isRecording ? <MicOff className="h-5 w-5" /> : <Mic className="h-5 w-5" />}
+          {isRecording ? <MicOff className="h-4 w-4 sm:h-5 sm:w-5" /> : <Mic className="h-4 w-4 sm:h-5 sm:w-5" />}
         </button>
 
         {/* Send button */}
         <button
           type="submit"
           disabled={!message.trim()}
-          className={`flex-shrink-0 p-3 rounded-full transition-all ${
+          className={`flex-shrink-0 p-2 sm:p-3 rounded-full transition-all ${
             message.trim()
               ? 'bg-whatsapp-green text-white hover:bg-whatsapp-green-dark'
               : 'bg-gray-200 text-gray-400 cursor-not-allowed'
           }`}
         >
-          <Send className="h-5 w-5" />
+          <Send className="h-4 w-4 sm:h-5 sm:w-5" />
         </button>
       </form>
 
       {/* Recording indicator */}
       {isRecording && (
-        <div className="mt-2 flex items-center space-x-2 text-sm text-red-500">
+        <div className="mt-2 flex items-center space-x-2 text-xs sm:text-sm text-red-500">
           <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
           <span>Recording... {Math.floor(recordingTime / 60)}:{(recordingTime % 60).toString().padStart(2, '0')}</span>
         </div>

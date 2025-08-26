@@ -4,6 +4,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Base responsive styles */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  body {
+    overscroll-behavior: none;
+  }
+}
+
 /* Custom scrollbar styles */
 ::-webkit-scrollbar {
   width: 6px;
@@ -29,8 +41,14 @@
 }
 
 .message-bubble {
-  max-width: 70%;
+  max-width: 85%;
   word-wrap: break-word;
+}
+
+@media (min-width: 640px) {
+  .message-bubble {
+    max-width: 70%;
+  }
 }
 
 .message-bubble.sent {
@@ -40,6 +58,21 @@
 
 .message-bubble.received {
   background-color: #FFFFFF;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 767px) {
+  .mobile-optimized {
+    font-size: 14px;
+  }
+  
+  .mobile-padding {
+    padding: 0.75rem;
+  }
+  
+  .mobile-spacing {
+    gap: 0.5rem;
+  }
 }
 
 /* Animation classes */
@@ -84,4 +117,43 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* Touch-friendly buttons on mobile */
+@media (max-width: 767px) {
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .touch-target {
+    min-height: 48px;
+    min-width: 48px;
+  }
+}
+
+/* Responsive text sizes */
+@media (max-width: 640px) {
+  .responsive-text-lg {
+    font-size: 1rem;
+  }
+  
+  .responsive-text-base {
+    font-size: 0.875rem;
+  }
+  
+  .responsive-text-sm {
+    font-size: 0.75rem;
+  }
+}
+
+/* Safe area for mobile devices with notches */
+@supports (padding: max(0px)) {
+  .safe-area-top {
+    padding-top: max(1rem, env(safe-area-inset-top));
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
 }

@@ -126,7 +126,7 @@ const MessageList = ({ messages, currentUserId, onAddReaction, onRemoveReaction,
         data-message-id={message._id}
         className={`flex ${isOwnMessage ? 'justify-end' : 'justify-start'} mb-4 group`}
       >
-        <div className="flex flex-col max-w-xs lg:max-w-md">
+        <div className="flex flex-col max-w-[280px] sm:max-w-xs lg:max-w-md">
           {/* Reply to message (if exists) */}
           {message.replyTo && (
             <div className={`mb-1 px-3 py-1 rounded-t-lg text-xs border-l-2 ${
@@ -140,7 +140,7 @@ const MessageList = ({ messages, currentUserId, onAddReaction, onRemoveReaction,
           )}
 
           <div
-            className={`${['voice', 'image', 'video', 'audio', 'document', 'file'].includes(message.messageType) ? '' : 'px-4 py-2'} rounded-lg ${
+            className={`${['voice', 'image', 'video', 'audio', 'document', 'file'].includes(message.messageType) ? '' : 'px-3 py-2 sm:px-4 sm:py-2'} rounded-lg ${
               message.replyTo ? 'rounded-tl-none' : ''
             } ${
               ['voice', 'image', 'video', 'audio', 'document', 'file'].includes(message.messageType) ? '' : (
@@ -160,7 +160,7 @@ const MessageList = ({ messages, currentUserId, onAddReaction, onRemoveReaction,
             {/* Message content */}
             <div className="break-words">
               {message.messageType === 'text' ? (
-                <p className="text-sm">{message.content}</p>
+                <p className="text-sm sm:text-base leading-relaxed">{message.content}</p>
               ) : message.messageType === 'voice' ? (
                 <VoiceMessage message={message} isOwn={isOwnMessage} currentUserId={currentUserId} />
               ) : ['image', 'video', 'audio', 'document', 'file'].includes(message.messageType) ? (
@@ -213,7 +213,7 @@ const MessageList = ({ messages, currentUserId, onAddReaction, onRemoveReaction,
 
   if (messages.length === 0) {
     return (
-      <div className="flex items-center justify-center h-full text-gray-500">
+      <div className="flex items-center justify-center h-full text-gray-500 p-4">
         <div className="text-center">
           <p className="text-sm">No messages yet</p>
           <p className="text-xs mt-1">Start the conversation!</p>
@@ -223,7 +223,7 @@ const MessageList = ({ messages, currentUserId, onAddReaction, onRemoveReaction,
   }
 
   return (
-    <div className="flex-1 overflow-y-auto p-4 space-y-4">
+    <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4">
       {messages.map((message, index) => {
         const previousMessage = index > 0 ? messages[index - 1] : null;
         const showDateSeparator = shouldShowDateSeparator(message, previousMessage);
@@ -232,7 +232,7 @@ const MessageList = ({ messages, currentUserId, onAddReaction, onRemoveReaction,
           <div key={message._id}>
             {/* Date separator */}
             {showDateSeparator && (
-              <div className="flex justify-center my-4">
+              <div className="flex justify-center my-3 sm:my-4">
                 <div className="bg-gray-200 text-gray-600 text-xs px-3 py-1 rounded-full">
                   {formatDateSeparator(message.createdAt)}
                 </div>

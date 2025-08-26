@@ -98,15 +98,15 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-8">
+    <div className="min-h-screen bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center p-4 safe-area-top safe-area-bottom">
+      <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-6 sm:p-8 my-4">
         {/* Header */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-6 sm:mb-8">
           <div className="flex items-center justify-center mb-4">
-            <MessageCircle className="h-12 w-12 text-green-500" />
+            <MessageCircle className="h-10 w-10 sm:h-12 sm:w-12 text-green-500" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Join Chataltra</h1>
-          <p className="text-gray-600">Create your account to get started</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Join Chataltra</h1>
+          <p className="text-sm sm:text-base text-gray-600">Create your account to get started</p>
         </div>
 
         {/* Error Message */}
@@ -117,7 +117,7 @@ const Register = () => {
         )}
 
         {/* Register Form */}
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
           <div>
             <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2">
               Username
@@ -129,7 +129,7 @@ const Register = () => {
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
-                className={`w-full pl-10 pr-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 ${
+                className={`w-full pl-10 pr-3 py-2.5 sm:py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 text-base sm:text-sm ${
                   validationErrors.username ? 'border-red-300' : 'border-gray-300'
                 }`}
                 placeholder="Choose a username"
@@ -152,7 +152,7 @@ const Register = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className={`w-full pl-10 pr-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 ${
+                className={`w-full pl-10 pr-3 py-2.5 sm:py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 text-base sm:text-sm ${
                   validationErrors.email ? 'border-red-300' : 'border-gray-300'
                 }`}
                 placeholder="Enter your email"
@@ -175,7 +175,7 @@ const Register = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className={`w-full pl-10 pr-10 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 ${
+                className={`w-full pl-10 pr-10 py-2.5 sm:py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 text-base sm:text-sm ${
                   validationErrors.password ? 'border-red-300' : 'border-gray-300'
                 }`}
                 placeholder="Create a password"
@@ -209,7 +209,7 @@ const Register = () => {
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                className={`w-full pl-10 pr-10 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 ${
+                className={`w-full pl-10 pr-10 py-2.5 sm:py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 text-base sm:text-sm ${
                   validationErrors.confirmPassword ? 'border-red-300' : 'border-gray-300'
                 }`}
                 placeholder="Confirm your password"
@@ -235,7 +235,7 @@ const Register = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full flex justify-center py-3 sm:py-2 px-4 border border-transparent rounded-md shadow-sm text-base sm:text-sm font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed min-h-touch"
           >
             {isLoading ? (
               <div className="spinner"></div>
@@ -246,8 +246,8 @@ const Register = () => {
         </form>
 
         {/* Login Link */}
-        <div className="mt-6 text-center">
-          <p className="text-sm text-gray-600">
+        <div className="mt-4 sm:mt-6 text-center">
+          <p className="text-sm sm:text-base text-gray-600">
             Already have an account?{' '}
             <button
               type="button"

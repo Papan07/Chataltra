@@ -15,7 +15,7 @@ import {
 import { formatDistanceToNow } from 'date-fns';
 import NewChatModal from './NewChatModal';
 
-const ChatSidebar = ({ selectedChat, onSelectChat, onToggleMobileMenu, onShowProfile }) => {
+const ChatSidebar = ({ selectedChat, onSelectChat, onToggleMobileMenu, onShowProfile, isMobile }) => {
   const [chats, setChats] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(true);
@@ -141,16 +141,16 @@ const ChatSidebar = ({ selectedChat, onSelectChat, onToggleMobileMenu, onShowPro
   return (
     <div className="flex flex-col h-full bg-white">
       {/* Header */}
-      <div className="p-4 border-b border-gray-200">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center space-x-3">
+      <div className="p-3 sm:p-4 border-b border-gray-200">
+        <div className="flex items-center justify-between mb-3 sm:mb-4">
+          <div className="flex items-center space-x-2 sm:space-x-3">
             <button
               onClick={onToggleMobileMenu}
               className="md:hidden p-1 hover:bg-gray-100 rounded"
             >
               <Menu className="h-5 w-5" />
             </button>
-            <h1 className="text-xl font-semibold text-gray-900">Chats</h1>
+            <h1 className="text-lg sm:text-xl font-semibold text-gray-900">Chats</h1>
           </div>
           
           <div className="relative">
@@ -193,10 +193,10 @@ const ChatSidebar = ({ selectedChat, onSelectChat, onToggleMobileMenu, onShowPro
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
           <input
             type="text"
-            placeholder="Search chats..."
+            placeholder={isMobile ? "Search..." : "Search chats..."}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-gray-100 border-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-whatsapp-green"
+            className="w-full pl-10 pr-4 py-2 sm:py-2.5 bg-gray-100 border-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-whatsapp-green text-sm sm:text-base"
           />
         </div>
       </div>
@@ -218,25 +218,25 @@ const ChatSidebar = ({ selectedChat, onSelectChat, onToggleMobileMenu, onShowPro
               <button
                 key={chat._id}
                 onClick={() => onSelectChat(chat)}
-                className={`w-full p-4 text-left hover:bg-gray-50 transition-colors ${
+                className={`w-full p-3 sm:p-4 text-left hover:bg-gray-50 transition-colors ${
                   selectedChat?._id === chat._id ? 'bg-whatsapp-green-light' : ''
                 }`}
               >
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center space-x-2 sm:space-x-3">
                   {/* Avatar */}
-                  <div className="relative">
+                  <div className="relative flex-shrink-0">
                     {getChatAvatar(chat) ? (
                       <img
                         src={getChatAvatar(chat)}
                         alt={getChatDisplayName(chat)}
-                        className="w-12 h-12 rounded-full object-cover"
+                        className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover"
                       />
                     ) : (
-                      <div className="w-12 h-12 bg-whatsapp-green rounded-full flex items-center justify-center">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-whatsapp-green rounded-full flex items-center justify-center">
                         {chat.isGroupChat ? (
-                          <Users className="h-6 w-6 text-white" />
+                          <Users className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
                         ) : (
-                          <span className="text-white font-semibold">
+                          <span className="text-white font-semibold text-sm sm:text-base">
                             {getChatDisplayName(chat).charAt(0).toUpperCase()}
                           </span>
                         )}
@@ -256,14 +256,14 @@ const ChatSidebar = ({ selectedChat, onSelectChat, onToggleMobileMenu, onShowPro
                   {/* Chat Info */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
-                      <h3 className="font-medium text-gray-900 truncate">
+                      <h3 className="font-medium text-gray-900 truncate text-sm sm:text-base">
                         {getChatDisplayName(chat)}
                       </h3>
-                      <span className="text-xs text-gray-500">
+                      <span className="text-xs text-gray-500 flex-shrink-0 ml-2">
                         {getLastMessageTime(chat)}
                       </span>
                     </div>
-                    <p className="text-sm text-gray-600 truncate">
+                    <p className="text-xs sm:text-sm text-gray-600 truncate">
                       {getLastMessagePreview(chat)}
                     </p>
                   </div>
@@ -275,13 +275,13 @@ const ChatSidebar = ({ selectedChat, onSelectChat, onToggleMobileMenu, onShowPro
       </div>
 
       {/* New Chat Button */}
-      <div className="p-4 border-t border-gray-200">
+      <div className="p-3 sm:p-4 border-t border-gray-200">
         <button
           onClick={() => setShowNewChatModal(true)}
-          className="w-full flex items-center justify-center space-x-2 bg-whatsapp-green text-white py-2 px-4 rounded-lg hover:bg-whatsapp-green-dark transition-colors"
+          className="w-full flex items-center justify-center space-x-2 bg-whatsapp-green text-white py-2.5 sm:py-3 px-4 rounded-lg hover:bg-whatsapp-green-dark transition-colors text-sm sm:text-base"
         >
           <Plus className="h-4 w-4" />
-          <span>New Chat</span>
+          <span>{isMobile ? 'New' : 'New Chat'}</span>
         </button>
       </div>
 
