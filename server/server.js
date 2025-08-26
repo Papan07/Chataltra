@@ -64,7 +64,10 @@ app.use((req, res, next) => {
 });
 
 // Connect to MongoDB
-connectDB();
+connectDB().catch(err => {
+  console.error('Failed to connect to MongoDB:', err);
+  process.exit(1);
+});
 
 // Initialize Socket.IO
 chatSocket(io);
@@ -98,9 +101,11 @@ app.use('/uploads', async (req, res, next) => {
 }, express.static(path.join(__dirname, 'uploads')));
 
 // Routes
+console.log('Setting up routes...');
 app.use('/api/auth', authRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/users', userRoutes);
+console.log('Routes configured successfully');
 
 // Basic route
 app.get('/', (req, res) => {
