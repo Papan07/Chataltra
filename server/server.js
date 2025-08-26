@@ -31,7 +31,8 @@ const io = new Server(server, {
       "http://localhost:5173",
       "http://localhost:5174",
       "https://chataltra.vercel.app",
-      "https://chataltra.onrender.com"
+      "https://chataltra.onrender.com",
+      "https://chataltra-8m034mceh-papan-namasudras-projects.vercel.app/",
     ],
     methods: ["GET", "POST"],
     credentials: true
@@ -40,7 +41,14 @@ const io = new Server(server, {
 
 // Middleware
 app.use(cors({
-  origin: [process.env.CLIENT_URL || "http://localhost:3000", "http://localhost:5173", "http://localhost:5174"],
+  origin: [
+    process.env.CLIENT_URL || "http://localhost:3000",
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "https://chataltra.vercel.app",
+    "https://chataltra.onrender.com",
+    "https://chataltra-8m034mceh-papan-namasudras-projects.vercel.app"
+  ],
   credentials: true
 }));
 app.use(express.json());
