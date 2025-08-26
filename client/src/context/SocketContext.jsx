@@ -21,7 +21,7 @@ export const SocketProvider = ({ children }) => {
   useEffect(() => {
     if (isAuthenticated && token && user) {
       // Initialize socket connection
-      const newSocket = io(import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:5001', {
+      const newSocket = io(import.meta.env.VITE_API_URL?.replace('/api', '') || 'https://chataltra.onrender.com', {
         auth: {
           token: token
         },
